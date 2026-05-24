@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>dev.prokop.mcp</groupId>
+    <artifactId>ibkr-mcp-suite</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>IBKR MCP Server Suite</name>
+    <description>A suite of Model Context Protocol (MCP) servers for Interactive Brokers trading.</description>
+
+    <modules>
+        <module>mcp-core-tools</module>
+        <module>mcp-server-cli</module>
+        <module>mcp-server-quarkus</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.release>21</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        
+        <tws.api.version>0.0.1</tws.api.version> 
+        <mcp.sdk.version>0.7.0</mcp.sdk.version>
+        <quarkus.version>3.15.1</quarkus.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>dev.prokop.ibkr</groupId>
+                <artifactId>tws-api</artifactId>
+                <version>${tws.api.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>io.modelcontextprotocol.sdk</groupId>
+                <artifactId>mcp</artifactId>
+                <version>${mcp.sdk.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>io.quarkus.platform</groupId>
+                <artifactId>quarkus-bom</artifactId>
+                <version>${quarkus.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
