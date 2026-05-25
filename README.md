@@ -2,6 +2,8 @@
 
 Interactive Brokers (IBKR) integration for the Model Context Protocol (MCP).
 
+This MCP server is based on the [TWS API Wrapper](https://github.com/prokop-dev/ibkr-tws-api-wrapper).
+
 ## Projects
 
 - `ibkr-mcp-core`: Core library for IBKR connectivity and logic.
