@@ -27,6 +27,7 @@
     <profiles>
         <profile>
             <id>native</id>
+            <!-- mvn clean package -Pnative -pl ibkr-mcp-stdio -->
             <build>
                 <plugins>
                     <plugin>
@@ -51,8 +52,10 @@
                 </plugins>
             </build>
         </profile>
+
         <profile>
             <id>uberjar</id>
+            <!-- mvn clean package -Puberjar -->
             <build>
                 <plugins>
                     <plugin>

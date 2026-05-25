@@ -24,9 +24,17 @@ java -jar ibkr-mcp-stdio/target/ibkr-mcp-stdio-1.0.0-SNAPSHOT.jar
 
 ## Adding to Gemini MCP (Local Configuration)
 
-To use this server with an MCP-compatible client (like Gemini or Claude), add it to your local configuration file.
+To use this server with an MCP-compatible client (like Gemini or Claude), add it to your local configuration.
 
-### Configuration Template
+### Option A: Using Gemini CLI (Recommended)
+
+Run the following command to add the server automatically. Using absolute paths is required:
+
+```bash
+gemini mcp add ibkr java -jar /Users/bart/code/ibkr-mcp-suite/ibkr-mcp-stdio/target/ibkr-mcp-stdio-1.0.0-SNAPSHOT.jar
+```
+
+### Option B: Manual Configuration Template
 
 Add the following entry to your `mcp_config.json` (the location depends on your OS and client, e.g., `~/Library/Application Support/Google/Chrome/Default/mcp_config.json` or similar):
 
