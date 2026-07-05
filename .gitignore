@@ -1,3 +1,5 @@
 /ibkr-mcp-core/target/
 /ibkr-mcp-stdio/target/
 /mcp-server-quarkus/target/
+/target/
+/.idea/
