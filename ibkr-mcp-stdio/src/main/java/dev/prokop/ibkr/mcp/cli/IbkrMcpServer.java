@@ -1,8 +1,7 @@
 package dev.prokop.ibkr.mcp.cli;
 
 
-import dev.prokop.ibkr.mcp.core.Resources;
-import dev.prokop.ibkr.mcp.core.Tools;
+import dev.prokop.ibkr.mcp.core.TwsMpcSync;
 import dev.prokop.ibkr.mcp.core.TwsConnection;
 import io.modelcontextprotocol.json.McpJsonDefaults;
 import io.modelcontextprotocol.server.McpServer;
@@ -19,46 +18,35 @@ import java.time.Duration;
  */
 public class IbkrMcpServer {
 
-    public static McpSyncServer server() {
-        final McpSchema.ServerCapabilities serverCapabilities =
-                McpSchema.ServerCapabilities.builder()
-                        .resources(true, true)
-                        //.prompts(true)
-                        .tools(true)
-                        .build();
+    private static TwsConnection twsConnection = new TwsConnection();
 
+    public static void main(String[] args) throws Exception {
+        twsConnection.start();
+
+        McpSyncServer server = server();
+        TwsMpcSync.resources(twsConnection).forEach(server::addResource);
+        TwsMpcSync.tools(twsConnection).forEach(server::addTool);
+    }
+
+    private static McpSyncServer server() {
         return McpServer.sync(transportProvider())
                 .serverInfo("IBKR MCP Server", "1.0.0")
                 .requestTimeout(Duration.ofSeconds(30))
                 .instructions("Interactive Brokers MCP Server")
-                .capabilities(serverCapabilities)
+                .capabilities(serverCapabilities())
                 .build();
-    }
-
-    public static void main(String[] args) throws Exception {
-        McpSyncServer server = server();
-        
-        System.err.println("Connecting to IBKR...");
-        TwsConnection twsConnection = new TwsConnection();
-        Tools tools = new Tools(twsConnection);
-        Resources resources = new Resources(twsConnection);
-
-        server.addTool(tools.getPositions());
-        server.addResource(resources.managedAccounts());
-
-        System.err.println("IBKR MCP Server starting on STDIO...");
-        twsConnection.getBridge().getManagedAccounts().thenAccept(accounts -> {
-            System.err.println("Managed accounts: " + accounts);
-        });
-        
-        // Keep the server alive
-        while (true) {
-            Thread.sleep(1000);
-        }
     }
 
     private static McpServerTransportProvider transportProvider() {
         return new StdioServerTransportProvider(McpJsonDefaults.getMapper());
+    }
+
+    private static McpSchema.ServerCapabilities serverCapabilities() {
+        return McpSchema.ServerCapabilities.builder()
+                .resources(true, true)
+                //.prompts(true)
+                .tools(true)
+                .build();
     }
 
 }

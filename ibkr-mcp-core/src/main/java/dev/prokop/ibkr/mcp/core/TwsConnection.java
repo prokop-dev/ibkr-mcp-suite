@@ -1,18 +1,19 @@
 package dev.prokop.ibkr.mcp.core;
 
 import dev.prokop.ibkr.twsapi.TwsApi;
-import dev.prokop.ibkr.twsapi.TwsSyncBridge;
 
 public class TwsConnection {
-    private final TwsSyncBridge bridge;
+    private final TwsApi twsApi;
 
     public TwsConnection() {
-        final var twsApi = new TwsApi();
-        twsApi.connect("127.0.0.1");
-        this.bridge = new TwsSyncBridge(twsApi);
+        this.twsApi = new TwsApi();
     }
 
-    public TwsSyncBridge getBridge() {
-        return bridge;
+    public void start() {
+        twsApi.connect("127.0.0.1").join();
+    }
+
+    public final TwsApi twsApi() {
+        return twsApi;
     }
 }
