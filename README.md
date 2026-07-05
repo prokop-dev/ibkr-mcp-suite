@@ -24,6 +24,11 @@ mvn clean package -Puberjar
 java -jar ibkr-mcp-stdio/target/ibkr-mcp-stdio-1.0.0-SNAPSHOT.jar
 ```
 
+### 3. Testing server
+```bash
+npx @modelcontextprotocol/inspector java -jar /Users/bart/.m2/repository/dev/prokop/ibkr/ibkr-mcp-stdio/1.0.0-SNAPSHOT/ibkr-mcp-stdio-1.0.0-SNAPSHOT.jar
+```
+
 ## Adding to Gemini MCP (Local Configuration)
 
 To use this server with an MCP-compatible client (like Gemini or Claude), add it to your local configuration.
