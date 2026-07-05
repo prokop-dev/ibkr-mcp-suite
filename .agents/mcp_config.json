@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "ibkr": {
+      "command": "java",
+      "args": [
+        "-jar",
+        "/Users/bart/.m2/repository/dev/prokop/ibkr/ibkr-mcp-stdio/1.0.0-SNAPSHOT/ibkr-mcp-stdio-1.0.0-SNAPSHOT.jar"
+      ]
+    }
+  }
+}
