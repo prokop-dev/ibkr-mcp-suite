@@ -9,6 +9,7 @@ import io.modelcontextprotocol.server.McpServer;
 import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.server.transport.StdioServerTransportProvider;
 import io.modelcontextprotocol.spec.McpSchema;
+import io.modelcontextprotocol.spec.McpServerTransportProvider;
 
 import java.time.Duration;
 
@@ -16,7 +17,7 @@ import java.time.Duration;
  * A simple "Hello World" MCP server that uses the STDIO transport.
  * It exposes a single tool 'hello' that takes a 'name' argument.
  */
-public class HelloWorldServer {
+public class IbkrMcpServer {
 
     public static McpSyncServer server() {
         final McpSchema.ServerCapabilities serverCapabilities =
@@ -26,7 +27,7 @@ public class HelloWorldServer {
                         .tools(true)
                         .build();
 
-        return McpServer.sync(new StdioServerTransportProvider(McpJsonDefaults.getMapper()))
+        return McpServer.sync(transportProvider())
                 .serverInfo("IBKR MCP Server", "1.0.0")
                 .requestTimeout(Duration.ofSeconds(30))
                 .instructions("Interactive Brokers MCP Server")
@@ -54,6 +55,10 @@ public class HelloWorldServer {
         while (true) {
             Thread.sleep(1000);
         }
+    }
+
+    private static McpServerTransportProvider transportProvider() {
+        return new StdioServerTransportProvider(McpJsonDefaults.getMapper());
     }
 
 }

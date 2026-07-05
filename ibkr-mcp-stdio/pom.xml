@@ -18,6 +18,12 @@
             <artifactId>ibkr-mcp-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.modelcontextprotocol.sdk</groupId>
+            <artifactId>mcp-json-jackson3</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -45,7 +51,7 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <mainClass>dev.prokop.ibkr.mcp.cli.HelloWorldServer</mainClass>
+                            <mainClass>dev.prokop.ibkr.mcp.cli.IbkrMcpServer</mainClass>
                             <imageName>ibkr-mcp-server</imageName>
                         </configuration>
                     </plugin>
@@ -72,7 +78,7 @@
                                     <createDependencyReducedPom>false</createDependencyReducedPom>
                                     <transformers>
                                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                            <mainClass>dev.prokop.ibkr.mcp.cli.HelloWorldServer</mainClass>
+                                            <mainClass>dev.prokop.ibkr.mcp.cli.IbkrMcpServer</mainClass>
                                         </transformer>
                                         <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                     </transformers>
